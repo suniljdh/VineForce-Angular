@@ -1,0 +1,37 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <!-- <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <h1 class="example-app-name">VineForce App</h1>
+  </mat-toolbar> -->
+
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="snav.toggle()" class="example-icon"
+      aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>VineForce App</span>
+    <span class="toolbar-spacer"></span>
+    <ul class="navigation-items">
+      <li>
+        <a routerLink="/location/view-country" routerLinkActive="router-link-active">Country</a>
+      </li>
+      <li>
+        <a routerLink="/location/view-state" routerLinkActive="router-link-active">State</a>
+      </li>
+    </ul>
+  </mat-toolbar>
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
+      <mat-nav-list>
+        <a mat-list-item routerLink="/location/view-country" routerLinkActive="router-link-active">Country</a>
+        <a mat-list-item routerLink="/location/view-state" routerLinkActive="router-link-active">State</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content style="padding: 10px;">
+
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

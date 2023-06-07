@@ -1,0 +1,45 @@
+<h1 mat-dialog-title>
+    <ng-container *ngIf="data.mode == 'A'; then addTemplate; else editTemplate"></ng-container>
+    <ng-template #addTemplate>
+        Add
+    </ng-template>
+    <ng-template #editTemplate>
+        Update
+    </ng-template>
+    <span> Country</span>
+</h1>
+<form [formGroup]="frm" (ngSubmit)="saveDetails()">
+    <div mat-dialog-content>
+        <div class="container">
+            <mat-form-field appearance="outline">
+                <mat-label>Country</mat-label>
+                <input matInput placeholder="Country Name" formControlName="countryname" #nameInput>
+                <mat-error>Country Name is required</mat-error>
+                <mat-error *ngIf="countryname.errors?.['minlength']">
+                    Please enter more than 2 character
+                </mat-error>
+            </mat-form-field>
+
+            <!--     
+            <mat-form-field appearance="fill" hintLabel="Country name required">
+                <mat-label>Country</mat-label>
+                <mat-select matNativeControl name="country" formControlName="country">
+                    <mat-option value="india">India</mat-option>
+                    <mat-option value="france">France</mat-option>
+                    <mat-option value="germany">Germany</mat-option>
+                    <mat-option value="japan">Japan</mat-option>
+                    <mat-option value="Mongolia">Mongolia</mat-option>
+                </mat-select>
+            </mat-form-field> -->
+
+
+
+
+
+        </div>
+        <div mat-dialog-actions align="end">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!frm.valid">Save</button>
+            <button mat-button mat-dialog-close>Close</button>
+        </div>
+    </div>
+</form>

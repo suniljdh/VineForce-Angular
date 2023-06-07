@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>
+    <ng-container *ngIf="data.mode == 'A'; then addTemplate; else editTemplate"></ng-container>
+    <ng-template #addTemplate>
+        Add
+    </ng-template>
+    <ng-template #editTemplate>
+        Update
+    </ng-template>
+    <span> State</span>
+</h1>
+<form [formGroup]="frm" (ngSubmit)="saveDetails()">
+    <div mat-dialog-content>
+        <div class="container">
+            <mat-form-field appearance="outline">
+                <mat-label>State</mat-label>
+                <input matInput placeholder="State Name" formControlName="statename" required>
+                <mat-error *ngIf="statename.errors?.['required']">
+                    State Name is required
+                </mat-error>
+                <mat-error *ngIf="statename.errors?.['minlength']">
+                    Please enter more than 2 character
+                </mat-error>
+            </mat-form-field>
+            <mat-divider [vertical]="true"></mat-divider>
+            <mat-form-field appearance="outline" hintLabel="Country name required">
+                <mat-label>Country</mat-label>
+                <mat-select formControlName="countryid" required>
+                  <mat-option *ngFor="let c of countrylist$" [value]="c.countryid">
+                    {{c.countryname}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="countryid.errors?.['required']">
+                    Country Name is required
+                </mat-error>
+              </mat-form-field>
+        </div>
+        <div mat-dialog-actions align="end">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!frm.valid">Save</button>
+            <button mat-button mat-dialog-close>Close</button>
+        </div>
+    </div>
+</form>
